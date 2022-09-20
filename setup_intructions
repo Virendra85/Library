@@ -1,0 +1,12 @@
+# Setup Instructions:
+
+1. Open the Project in a folder.
+2. Setup a new Database in Project(LIBRARY) settings.py file.
+3. Setup you Email Id and password in settings.py file. 
+4. For logging first time, we need to insert a record in the databse and insert roleName as Librarian/Member. 
+5. Open the terminal in same folder. 
+6. Make sure the internet is connected. 
+7. Create the models(tables) by running the command:
+    | python manage.py makemigrations 
+    | python manage.py migrate 
+8. Run the server by typing command: py manage.py runserver.
