@@ -30,7 +30,7 @@ class RegistrationCtl(BaseCtl):
         self.form['gender'] = requestForm['gender']
         self.form['mobilenumber'] = requestForm['mobilenumber']
         self.form['role_Id'] = 2
-        self.form['role_Name'] = 'Student'
+        self.form['role_Name'] = 'Member'
 
     # Populate Form from model
     def model_to_form(self, obj):
