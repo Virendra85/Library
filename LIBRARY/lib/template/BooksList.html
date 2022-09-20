@@ -1,0 +1,45 @@
+
+
+{% include  "./Header.html"%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        td,th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="background-color: whitesmoke;background-image:url('../../static/images/list_background.png');background-repeat: no-repeat;width: 100%;background-size: cover ;">
+    <div class="container-fluid">
+        <div>
+            <br>
+            <H2 align="center">Book List</H2><br>
+        </div>
+        <form method="POST">
+            <div class="row">
+            <div class="col-md-12">
+                <table class="table table-sm table-bordered table-hover table-responsive-sm">
+                    <thead class="thead-dark">
+                        <th scope="row">S.No.</th>
+                        <th scope="row">Book Name</th>
+                        <th scope="row">Book Description</th>
+                        <th scope="row">Book Status</th>
+                    </thead>
+                    <tbody>
+                        {% for e in pageList %}
+                        <tr>
+                            <td>{{ form.index|add:forloop.counter0 }}</td>
+                            <td>{{e.bookName}}</td>
+                            <td>{{e.bookDescription}}</td>
+                            <td>{{e.bookStatus}}</td>
+                        {% endfor %}
+                        </tr>                        
+                    </tbody>
+                </table>
+            </div>
+</body>
+
+</html>
+{% include  "./Footer.html"%}

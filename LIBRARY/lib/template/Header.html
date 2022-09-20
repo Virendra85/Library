@@ -1,0 +1,187 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--Used for icon-->
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+{% load static %}
+
+<script>
+
+    function selectAll(source) {
+        checkboxes = document.getElementsByName('ids');
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    }
+
+    function selectone(so) {
+        checkboxes = document.getElementById('mainbox');
+        unbox = document.getElementsByName('ids');
+        var box = false;
+        for (var i = 0, n = unbox.length; i < n; i++) {
+            if (unbox[i].checked == true) {
+                box = true;
+            } else {
+                box = false;
+                break;
+            }
+        }
+        checkboxes.checked = box;
+    }
+</script>
+<style>
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #343a40 !important;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(224, 179, 31, 0.2);
+        z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-menu a {
+        color: whitesmoke;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-menu a:hover {
+        background-color: #686464
+    }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="admin">
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            {% if request.session.name == None %}
+
+            <li class="nav-item">
+                <i class="fa fa-user"
+                    style="font-size:30px;color:white; margin-left:1050px; padding-top:15px;float: right;"></i>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/lib/Login" id="navbardrop" data-toggle="dropdown"
+                    style="color:whitesmoke; font: 1000;font-style: italic;font-family: bold; font-size: 20px">
+                    Hi Guest
+                </a>
+                <div class="dropdown-menu" onMouseOver="this.style.backgroundColor='grey'"
+                    onMouseOut="this.style.backgroundColor='#FFAC33'" style="background-color: rgb(148, 148, 27);">
+                    <a class="dropdown-item" href="/lib/Login"><span style="color:whitesmoke;"><i
+                                class="fas fa-sign-in-alt"></i> Login</span></a>
+                    <a class="dropdown-item" href="/lib/Registration"><span style="color:whitesmoke;"><i
+                                class="fas fa-user-plus"></i> Registration</span></a>
+                </div>
+            </li>
+            {% elif request.session.name == "Librarian" %}
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/lib/User" id="navbardrop" data-toggle="dropdown">
+                    <i class="fa fa-user" style="color: white;"></i>
+                    User
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/lib/User"><i class="fa fa-user"></i> User</a>
+                    <a class="dropdown-item" href="/lib/UserList"><i class="fas fa-list"></i> UserList</a>
+
+                </div>
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/lib/Role" id="navbardrop" data-toggle="dropdown">
+                    <i class="fa fa-users" style="color:white;"></i>
+                    Role
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/lib/Role"> <i class="fa fa-users"></i> Role</a>
+                    <a class="dropdown-item" href="/lib/RoleList"><i class="fas fa-list"></i> RoleList</a>
+
+                </div>
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/lib/Book" id="navbardrop" data-toggle="dropdown">
+                    <i class="fas fa-book" style="color: white;"></i>
+                    Book
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/lib/Book"><i class="fas fa-book"></i> Book</a>
+                    <a class="dropdown-item" href="/lib/BookList"><i class="fas fa-list"></i> BookList</a>
+
+                </div>
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/lib/ChangePassword" id="navbardrop" data-toggle="dropdown">
+                    <i class="fas fa-info-circle" style="color:white;"></i>
+
+                    About
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/lib/ChangePassword"><i class="fas fa-key"></i> ChangePassword</a>
+                    <a class="dropdown-item" href="/auth/Logout"><i class="fas fa-sign-out-alt"></i> LOGOUT</a>
+                    <a class="dropdown-item" href="/lib/MyProfile"><i class="fas fa-user-circle"></i> MyProfile</a>
+
+                </div>
+
+
+            </li>
+
+            <li class="nav-item">
+                <h6 style="color:cyan;font-style: bold;" class="nav-link"> {{request.session.user.firstName}}
+                    {{request.session.user.lastName}}-(Librarian)</h6>
+            </li>
+            <li class="nav-item">
+                <h6 style="color:yellow;" class="nav-link"></h6>
+            </li>
+            {% elif request.session.name == "Member" %}
+            <li class="nav-item">
+                <a class="nav-link" href="/lib/BooksList" style="color:white"><i class="fas fa-list"></i> Book List</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/lib/ChangePassword" id="navbardrop" data-toggle="dropdown" style="color:white">
+                    <i class="fas fa-info-circle"></i>
+
+                    About
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/lib/ChangePassword"><i class="fas fa-key"></i> ChangePassword</a>
+                    <a class="dropdown-item" href="/auth/Logout"><i class="fas fa-sign-out-alt"></i> LOGOUT</a>
+                    <a class="dropdown-item" href="/lib/MyProfile"><i class="fas fa-user-circle"></i> MyProfile</a>
+                    <form Method="POST" action="/lib/BooksList/">
+                        <input type="hidden" name="id" value="{{request.session.user.id}}">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" class="btn-danger" name="operation" value="Delete"><span style="color:white;">My Account</span>
+                    </form>
+                </div>
+
+            </li>
+
+            <li class="nav-item">
+                <h6 style="color:cyan;font-style: bold;" class="nav-link"> {{request.session.user.firstName}}(Member)</h6>
+            </li>
+
+
+            </li>
+
+
+      {% endif%}
+        </ul>
+
+    </div>
+</nav>
